@@ -190,3 +190,43 @@ def password_change(request):
 
 # pip freeze > requirements.txt
 # pip install -r requirements.txt
+
+'''
+Domain Name : it is unique human readable address of your website
+
+ip address : 142.153.123.143 
+facebook.com --> DNS -->connect ip address
+
+https://www.facebook.com/
+
+https : protocol (rule that help to communicate with server)
+www -->sub domain 
+ftp.facebook.com (file transfer)
+mail.facebbook.com (mail )
+
+facebook.com : root domain (represent by owner)
+
+.com -->top level domain
+.com.np
+.in
+.net
+.dev
+org
+.abc
+.xyz
+
+.com.np
+
+
+Hosting : renting space on server
+
+type :
+shared hosting : server 
+vps hosting : 
+dedicated hosting : 
+cloud hosting : aws ,azure
+
+
+
+
+'''
