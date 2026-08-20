@@ -178,3 +178,44 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+
+
+# django logger 
+import os
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'timestamp': {
+            'format': '{asctime} - {levelname} - {message}',
+            'style': '{',  # Ensure the style matches the format (e.g., `{` for Python 3.2+)
+        },
+    },
+    'handlers': {
+        
+        'file': {
+            'level': 'ERROR',  # Only log errors
+            'class': 'logging.FileHandler',
+            'filename': 'debug.log',  # Log file
+            'formatter': 'timestamp',  # Use the verbose formatter
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'timestamp',  # Refers to the 'timestamp' formatter
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+}
+
+
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/'
+SOCIAL_AUTH_LOGIN_ERROR_URL = '/'
+
+SOCIAL_AUTH_FACEBOOK_LOGIN_ERROR_URL = '/'

@@ -8,33 +8,40 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
+import logging
 import re
+logger=logging.getLogger("django")
 # Create your views here.
 # @login_required(login_url="log_in")
 def index(request):
     category=Category.objects.all()
     cateid=request.GET.get('category') #"2","all"
+    momo=None
     # print(cateid)
     # print(type(cateid))
-   
-    if cateid == 'all':
-        momo=Momo.objects.filter(is_available=True)
- 
-    elif cateid:
+    try:
         
-        momo=Momo.objects.filter(is_available=True,category=cateid)
-    else:
-        momo=Momo.objects.filter(is_available=True)
-    if request.method== 'POST':
-        name=request.POST['name']
-        phone=request.POST['phone']
-        email=request.POST['email']
-        message=request.POST['message']
-        Contact.objects.create(name=name,email=email,phone=phone,message=message)
-        # request.session["name"]=name
-        response= redirect('index')
-        response.set_cookie('name',name,max_age=3600)
-        return response
+        
+        if cateid == 'all':
+            momo=Momo.objects.filter(is_available=True)
+    
+        elif cateid:
+            
+            momo=Momo.objects.filter(is_available=True,category=cateid)
+        else:
+            momo=Momo.objects.filter(is_available=True)
+        if request.method== 'POST':
+            name=request.POST['name']
+            phone=request.POST['phone']
+            email=request.POST['email']
+            message=request.POST['message']
+            Contact.objects.create(name=name,email=email,phone=phone,message=message)
+            # request.session["name"]=name
+            response= redirect('index')
+            response.set_cookie('name',name,max_age=3600)
+            return response
+    except Exception as e:
+        logger.error(e,exc_info=True)
     
     context={
         'category':category,
@@ -137,6 +144,7 @@ def log_in(request):
             messages.error(request,"username is not register yet")
             return redirect("log_in")
         
+        
         user=authenticate(username=username,password=password) #user=sujan710 , user=NOne
         
         if user is not None:
@@ -173,7 +181,25 @@ storage limit (4kb per cookies)
 user preferece
 
 
+
 Session :
+
+
+frontend :html ,css ,js
+backend  : 
+database :
+
+SQL : row ,column(table),relationship 
+
+eg : bussiness (eccomerce,crm ,erp)
+mysql,postgress,orcal
+NO sql:
+unstructure data (randome): json 
+real time communication : whatsapp,facebook
+mongadb,radis
+
+postgresql
+pgadmin
 
 '''
 @login_required(login_url="log_in")
@@ -225,6 +251,9 @@ shared hosting : server
 vps hosting : 
 dedicated hosting : 
 cloud hosting : aws ,azure
+
+===========================================================
+django Logger(logging):
 
 
 
